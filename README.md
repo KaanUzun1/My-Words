@@ -11,6 +11,11 @@ This is a web program that allows users to keep track of the words they want to 
 - Adding and removing the examples
 - Program notifies you to practice the words once in a while
 
+## Libraries I used
+- Flask for routing, rendering templates and managing data.
+- werkzeug for security purposes
+- Bootstrap for Front-end Styling and Responsive Design
+
 ## Installation
 1. Clone the repository:
    ```bash
