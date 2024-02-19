@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block top %}
+
+<div class="col" style="text-align: right;">
+    <div><form method="get" action="/register"><button class="submit-button" type="submit">Register</button></form></div>
+</div>
+
+{% endblock %}
+
+{% block main %}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
+    <div class="login">
+        <div class="row">
+            <h3 style="margin-right: auto;" >Login</h3>
+            <p style="margin-right: auto;" >Please sign in to continue</p>
+        </div>
+        <div class="row">
+            <form method="post" action="/login">
+                <input class="input" autocomplete="off" placeholder="Username" name="username" type="text" autofocus><br>
+                <input class="input" placeholder="Password" name="password" type="password"><br>
+                {% if fail_message is defined %}
+                    <p style="color: rgb(239, 71, 71);margin-bottom: -7px;">{{ fail_message }}</p>
+                {% endif %}
+                <button type="submit" class="submit-button">Login</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

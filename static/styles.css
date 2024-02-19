@@ -1,0 +1,235 @@
+.close-button {
+    float: right;
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 30px;
+    border: none;
+    background: none;
+}
+.close-button:hover {
+    color: black;
+}
+.delete-button {
+    float: right;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 30px;
+    border: none;
+    background: none;
+}
+.delete-button:hover {
+    color: rgb(225, 67, 67);
+}
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    width: 300px;
+  }
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+.form-element {
+    margin: 10px;
+    border-radius: 25px;
+    border: 25px;
+    background-color: #f5f1f1;
+  }
+
+.add-word {
+    width: fit-content;
+    background-color: transparent;
+    bottom: 0;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    transition: 0.3s;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+.add-word:hover {
+    background-color: var(--hover-color);
+}
+
+.bottom-row {
+    bottom: 0;
+  }
+
+.change-column {
+    float: left;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 20px;
+    border: none;
+    background: none;
+    vertical-align: middle;
+    margin-top: 9px;
+  }
+
+.change-column:hover {
+    color: black;
+  }
+
+.row-shape-space {
+    margin-right: 3px;
+    margin-left: 3px;
+    margin-top: 5px;
+    border-radius: 25px;
+  }
+
+.headers {
+    border-radius: 25px;
+    border: solid black 1px;
+  }
+
+.example-input {
+    border-radius: 25px;
+    border: none;
+    margin-bottom: 5px;
+    background-color: #f5f1f1;
+  }
+
+.example-input:focus {
+    outline: none;
+  }
+
+.example-button {
+    border-radius: 25px;
+    transition: 0.3s;
+    border: none;
+    background-color:transparent;
+  }
+
+.example-button:hover {
+    background-color: var(--hover-color);
+  }
+.logout-button {
+    background-color: transparent;
+    border: none;
+    color: rgb(80, 78, 78);
+    font-size: 20px;
+    margin-top: 5px;
+    border-radius: 25px;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+.logout-button:hover {
+    color: white;
+    background-color: rgb(80, 80, 80);
+}
+.top-side {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 7px;
+}
+.image-logout-container {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+.message-image {
+    height: 25px;
+    margin-top: 5px;
+    margin-right: 7px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.dropbtn {
+    background-color: transparent;
+    padding: 1px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f5f5e7;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f4f4ce;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    right: 0;
+}
+.gradient-bg {
+    background: linear-gradient(to right ,#8EFF90 ,#8297E9 , #ffbb7a);
+}
+.top-side {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 7px;
+}
+.submit-button {
+  background-color: transparent;
+  border: none;
+  color: rgb(80, 78, 78);
+  font-size: 20px;
+  margin-top: 5px;
+  border-radius: 25px;
+  transition: 0.3s;
+  margin-bottom: 10px;
+}
+.submit-button:hover {
+  color: white;
+  background-color: rgb(80, 80, 80);
+}
+.input {
+  background-color: transparent;
+  border-radius: 15px;
+  margin: 5px;
+  border: 2px solid gray;
+}
+.input:focus {
+  border: 3px solid gray;
+  outline: none;
+}
+.login {
+  text-align: center;
+  background-color: #f5f5e7;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 50px;
+  width: 360px;
+  height: 320px;
+}
+.register {
+  text-align: center;
+  background-color: #f5f5e7;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 50px;
+  width: 380px;
+  height: 350px;
+}

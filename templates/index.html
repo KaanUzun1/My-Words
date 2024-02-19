@@ -1,0 +1,298 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Words
+{% endblock %}
+
+{% block top %}
+
+<div class="col container image-logout-container">
+    <div class="dropdown" style="float: right;">
+        {% if mustPractice2days is defined or mustPractice7days %}
+            <button class="dropbtn"><img class="message-image" src="/static/images/message_notify.png"></button>
+        {% else %}
+            <button class="dropbtn"><img class="message-image" src="/static/images/message.png"></button>
+        {% endif %}
+        <div class="dropdown-content">
+            {% if mustPractice2days is defined %}
+                <a>Words you need to practice</a>
+                {% for word in mustPractice2days %}
+                    <a href="#">{{ word }}</a>
+                {% endfor %}
+            {% endif %}
+            {% if mustPractice7days is defined %}
+                {% for word in mustPractice7days %}
+                    <a href="#">{{ word }}</a>
+                {% endfor %}
+            {% endif %}
+            {% if mustPractice2days is not defined and mustPractice7days is not defined %}
+                <a href="#">Your notification box is empty</a>
+            {% endif %}
+        </div>
+      </div>
+    <form method="post" action="/logout">
+        <button type="submit" class="logout-button">Log out</button>
+    </form>
+</div>
+
+
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm headers" style="background-color: #8297E9; margin-right: 5px; text-align: center;"><h3>Words I want to learn</h3></div>
+        <div class="col-sm headers" style="background-color: #ffbb7a; margin-right: 5px; text-align: center;"><h3>Words I am learning</h3></div>
+        <div class="col-sm headers" style="background-color: #8EFF90; margin-right: 5px; text-align: center;"><h3>Words I mastered</h3></div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <!--<img src="{{ url_for('static', filename='images/yellow_post-it.png') }}" class="image" />-->
+            {% if length %}
+                {% for i in range(length) %}
+                    {% if columns[i] == "WordsWillLearn" %}
+                        <div class="row row-shape-space" style="background-color: #8297E9">
+                            <div class="col-sm">
+                                <span style="cursor: pointer; font-size: 30px" id="{{ i }}">{{ words[i] }}</span>
+                            </div>
+                            <div class="col-sm">
+                                <form action="/change_column" method="post">
+                                    <input type="hidden" value="LearningWords" name="column">
+                                    <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                    <button class="change-column" type="submit">></button>
+                                </form>
+                            </div>
+                            <div class="col-sm">
+                                <form action="/delete" method="post">
+                                    <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                    <button class="close-button" type="submit">&times;</button>
+                                </form>
+                            </div>
+                            <div style="display: none;" class="{{ i }}">
+                                <strong>Meaning</strong><p class="meaning" data-meaning-index="{{ word_ids[i] }}"> {{ meanings[i] }} </p>
+                                <ul>
+                                    {% if examples[i] == " " %}
+
+                                    {% elif examples[i] is iterable and examples[i] is not string %}
+                                        {% for inner_example in examples[i] %}
+                                        <li>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        {{ inner_example }}
+                                                    </div>
+                                                    <div class="col-auto" style="text-align: left;">
+                                                        <form action="/delete_example" method="post">
+                                                            <input type="hidden" value="{{ inner_example }}" name="example">
+                                                            <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                                            <button class="delete-button" type="submit">&times;</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-auto">
+                                                        {{ examples[i] }}
+                                                    </div>
+                                                    <div class="col" style="text-align: left;">
+                                                        <form action="/delete_example" method="post">
+                                                            <input type="hidden" value="{{ examples[i] }}" name="example">
+                                                            <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                                            <button class="delete-button" type="submit">&times;</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                <form method="post" action="/add_example">
+                                    <input class="example-input" type="text" autofocus autocomplete="off" placeholder=" Example" name="example">
+                                    <input hidden value="{{ word_ids[i] }}" name="word_id">
+                                    <button class="example-button" style="--hover-color: #41549e" type="submit">Add example</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <div class="row">
+                <button class="add-word" style="--hover-color: #8297E9; --border-color: #8297E9;" id="WordsWillLearn">Add Word</button>
+            </div>
+        </div>
+        <div class="col-sm">
+            {% if length %}
+                {% for i in range(length) %}
+                    {% if columns[i] == "LearningWords" %}
+                        <div class="row row-shape-space" style="background-color: #ffbb7a">
+                            <div class="col-sm">
+                                <span style="cursor: pointer; font-size: 30px" id="{{ i }}">{{ words[i] }}</span>
+                            </div>
+                            <div class="col-sm">
+                                <form action="/change_column" method="post">
+                                    <input type="hidden" value="WordsWillLearn" name="column">
+                                    <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                    <button class="change-column" type="submit"><</button>
+                                </form>
+                                <form action="/change_column" method="post">
+                                    <input type="hidden" value="MasteredWords" name="column">
+                                    <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                    <button class="change-column" type="submit">></button>
+                                </form>
+                            </div>
+                            <div class="col-sm">
+                                <form action="/delete" method="post">
+                                    <input type="hidden" value="{{ word_ids[i] }}" name="word_id"><button class="close-button" type="submit">&times;</button>
+                                </form>
+                            </div>
+                            <div style="display: none;" class="{{ i }}">
+                                <strong>Meaning</strong><p class="meaning" data-meaning-index="{{ word_ids[i] }}"> {{ meanings[i] }} </p>
+                                <ul>
+                                    {% if examples[i] == " " %}
+
+                                    {% elif examples[i] is iterable and examples[i] is not string %}
+                                        {% for inner_example in examples[i] %}
+                                        <li>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        {{ inner_example }}
+                                                    </div>
+                                                    <div class="col-auto" style="text-align: left;">
+                                                        <form action="/delete_example" method="post">
+                                                            <input type="hidden" value="{{ inner_example }}" name="example">
+                                                            <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                                            <button class="delete-button" type="submit">&times;</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-auto">
+                                                        {{ examples[i] }}
+                                                    </div>
+                                                    <div class="col" style="text-align: left;">
+                                                        <form action="/delete_example" method="post">
+                                                            <input type="hidden" value="{{ examples[i] }}" name="example">
+                                                            <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                                            <button class="delete-button" type="submit">&times;</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                <form method="post" action="/add_example">
+                                    <input class="example-input" type="text" autofocus autocomplete="off" placeholder=" Example" name="example">
+                                    <input hidden value="{{ word_ids[i] }}" name="word_id">
+                                    <button class="example-button" style="--hover-color: #e8a566;" type="submit">Add example</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <div class="row">
+                <button class="add-word" style="--hover-color: #ffbb7a; --border-color: #ffbb7a;" id="LearningWords">Add Word</button>
+            </div>
+        </div>
+        <div class="col-sm">
+            {% if length %}
+                {% for i in range(length) %}
+                    {% if columns[i] == "MasteredWords" %}
+                        <div class="row row-shape-space" style="background-color: #8eff90;">
+                            <div class="col-sm">
+                                <span style="cursor: pointer; font-size: 30px" id="{{ i }}">{{ words[i] }}</span>
+                            </div>
+                            <div class="col-sm">
+                                <form action="/change_column" method="post">
+                                    <input type="hidden" value="LearningWords" name="column">
+                                    <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                    <button class="change-column" type="submit"><</button>
+                                </form>
+                            </div>
+                            <div class="col-sm">
+                                <form action="/delete" method="post">
+                                    <input type="hidden" value="{{ word_ids[i] }}" name="word_id"><button class="close-button" type="submit">&times;</button>
+                                </form>
+                            </div>
+                            <div style="display: none;" class="{{ i }}">
+                                <strong>Meaning</strong><p class="meaning" data-meaning-index="{{ word_ids[i] }}"> {{ meanings[i] }} </p>
+                                <ul>
+                                    {% if examples[i] == " " %}
+
+                                    {% elif examples[i] is iterable and examples[i] is not string %}
+                                        {% for inner_example in examples[i] %}
+                                        <li>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        {{ inner_example }}
+                                                    </div>
+                                                    <div class="col-auto" style="text-align: left;">
+                                                        <form action="/delete_example" method="post">
+                                                            <input type="hidden" value="{{ inner_example }}" name="example">
+                                                            <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                                            <button class="delete-button" type="submit">&times;</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-auto">
+                                                        {{ examples[i] }}
+                                                    </div>
+                                                    <div class="col" style="text-align: left;">
+                                                        <form action="/delete_example" method="post">
+                                                            <input type="hidden" value="{{ examples[i] }}" name="example">
+                                                            <input type="hidden" value="{{ word_ids[i] }}" name="word_id">
+                                                            <button class="delete-button" type="submit">&times;</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                <form method="post" action="/add_example">
+                                    <input class="example-input" type="text" autofocus autocomplete="off" placeholder=" Example" name="example">
+                                    <input hidden value="{{ word_ids[i] }}" name="word_id">
+                                    <button class="example-button" style="--hover-color: #57a058;" type="submit">Add example</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <div class="row">
+                <button class="add-word" style="--hover-color: #8EFF90; --border-color: #8EFF90;" id="MasteredWords">Add Word</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container form-popup">
+
+</div>
+
+{% endblock %}
+{% block script %}
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+    {% endblock %}
+</html>
