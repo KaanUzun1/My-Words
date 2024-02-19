@@ -1,8 +1,20 @@
 # My Words
-#### Video Demo:  <https://youtu.be/GXdrdLYG-GM>
-#### Description:
-I wanted to create something that can really be helpful to people and myself. My project is a website that is made for language learners. Its main goal is to help the learners keep track of the words they will learn or they are currently learning. My website does this through three columns; words I want to learn, words I am learning, words I mastered. As the names of the columns suggest these columns are for the words you will learn, you are learning, and you learned respectively. And for the words that are in the ‘words I am learning’ column, this website will notify you to practice the given word every second day after the word is added to the column. The same logic applies to the words that are in the ‘words I mastered’ column. But the website does the same thing for the words there every seven days.
-I used the flask library to be able to work with a database on my website. On top of that, there is a Python code in my project file called helpers.py. I took these lines of code from one of CS50’s problem sets. I found it very practical. Sınce I need to dynamically receive and insert data in my database, I also used CS50’s library for SQL commands in Python. The others I used that made my job pretty easier are; the datetime library and the werkzeug.security library.
-Styling my website was the most difficult thing that I had to do. To code my website more efficiently, I used Bootstrap’s CSS and JavaScript libraries. At first, the main webpage was looking empty. Even when I’ve done with the whole look of the website. I thought maybe a navbar could add some functionality and richness to look. But then I designed my own background, and it looked as if navbar would be too much. I specially designed the words on the site to allow users to see the meaning of the word whenever they want. I thought having many different words, their meanings and their usages at the same time would give the website a messy look.
-I wanted to have a simple log in and register screen that is why I wanted to keep that page simple and straightforward. There is no JavaScript code in those two different pages. But the main page has a lot of functionalities. Such as changing the columns of the words, adding examples to the words, deleting and adding words etc. To achieve this functionalities I used JavaScript code in my html files. 
-In my project’s folder there are multiple files and directories. In the directory called static, there are my CSS codes and the images I’ve used building the website. Such as a favicon. In the directory called templates, there are all the html files. The file called app.py contains all the Python code for running the server. helpers.py only has a function defined in it. Lastly users.db file basically contains all the data of the users.
+
+![Gameplay Demo](demo.gif)
+
+## Description
+This is a web program that allows users to keep track of the words they want to learn in a foreign language. It does that through three columns: Words I want to learn, Words I am learning and Words I mastered. You can add words to any column you want. You can also add the description of the word, you can add examples in which the word is used.
+
+## Features
+- Adding words to any column you want
+- Being able to change the columns that the word belongs
+- Being able to change the description of the word
+- Adding and removing the examples
+- Program notifies you to practice the words once in a while
+
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/KaanUzun1/Personal-Projects/tree/161b8b0347f7784d8001f1d48070b77ac7ba8118/snake
+
+2. Make sure you have the Pygame library downloaded
