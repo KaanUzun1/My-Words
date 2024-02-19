@@ -14,7 +14,7 @@ This is a web program that allows users to keep track of the words they want to 
 ## Libraries I used
 - Flask for routing, rendering templates and managing data.
 - werkzeug for security purposes
-- Bootstrap for Front-end Styling and Responsive Design
+- Bootstrap for front-end styling and responsive design
 
 ## Installation
 1. Clone the repository:
